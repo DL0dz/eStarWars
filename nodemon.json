@@ -1,0 +1,9 @@
+{
+  "verbose": false,
+  "ignore": [
+    ".gitignore", ".git", ".jshintrc",
+    "*.jade",
+    "node_modules", "public", "test"
+  ],
+  "watch": "*.js"
+}

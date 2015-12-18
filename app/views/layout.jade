@@ -1,0 +1,23 @@
+doctype html
+html(lang='fr')
+  head
+    meta(charset='utf-8')
+    base(href='/')
+    title= 'May the force be with you'
+
+    meta(name='description', content='Here you can find sublime lasers and helmets')
+
+    link(rel='stylesheet', href='app.css')
+
+  body
+    //- if user
+    //-   include includes/header-connected
+    //- else
+    //-   include includes/header-disconnected
+
+    main
+      block content
+
+    //- include includes/footer
+
+    script(src='app.js', defer)

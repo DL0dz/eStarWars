@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .content
+    if error.status == 404 || error.status == 410
+      h1 Page not found.
+      a(href="/") Home
+    if error.status == 500
+      p Internal server error.
+      a(href="/") Home
+
+  pre #{error.stack}
