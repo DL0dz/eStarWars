@@ -1,4 +1,4 @@
-estarwars
+eStarWars
 ====
 
 ## Prérequis
@@ -13,14 +13,14 @@ estarwars
 
 Cloner l'appli et l'installer
 ```shell
-git clone https://blabla
+git clone https://github.com/DL0dz/eStarWars.git
 cd estarwars
 git checkout develop
 npm install
 ```
 
 Créer un répertoire pour mongodb, exemple `data` et y lancer une instance de
-mongodb
+mongodb.
 ```shell
 mkdir data
 mongod --dbpath=./data/
@@ -40,7 +40,7 @@ brunch w
 npm run dev
 ```
 
-Sur une machine windows ce sera plutôt
+Sur une machine windows ce sera plutôt :
 ```shell
 set DEBUG=estarwars:* nodemon ./bin/www
 ```
