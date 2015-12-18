@@ -52,6 +52,7 @@
     "moment": "^2.10.6",
     "moment-timezone": "^0.4.1",
     "mongoose": "^4.2.2",
+    "morgan": "^1.6.1",
     "multer": "^1.1.0",
     "node-env-file": "^0.1.7",
     "node-uuid": "^1.4.3",
