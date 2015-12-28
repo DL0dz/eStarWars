@@ -14,6 +14,8 @@ const productSchema = new Schema({
   tags: [{type: String, trim: true}],
 });
 
-const Product = mongoose.model('Product', productSchema);
+productSchema.statics.saveProduct = function saveProduct(product) {
+  return this.create(product);
+};
 
-module.exports = Product;
+module.exports = mongoose.model('Product', productSchema);
