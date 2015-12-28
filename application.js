@@ -25,6 +25,7 @@ if (process.env.NODE_ENV !== 'production') {
 require('./app/models/connection');
 
 app.use('/', require('./app/controllers/home'));
+app.use('/api', require('./app/controllers/product'));
 
 
 // Errors handling
