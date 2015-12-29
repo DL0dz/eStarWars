@@ -6,20 +6,22 @@ const Product = require('../models/product');
 
 function createProduct(req, res) {
   const starWarsProduct = new Product({
-    title: 'lukes Saber',
-    content: 'The most popular jedi saber',
+    title: 'lukes Saber', // req.body.title
+    content: 'The most popular jedi saber', // req.body.content
     created_at: Date.now(),
-    published: false,
-    quantity: 30,
-    price: 499,
-    category: 'laser',
-    tags: ['jedi', 'alliance'],
+    published: false, // req.body.published
+    quantity: 30, // req.body.quantity
+    price: 499, // req.body.price
+    category: 'laser', // req.body.category
+    tags: ['jedi', 'alliance'], // req.body.tags
   });
 
   Product.saveProduct(starWarsProduct)
     .then(function callback(productSaved) {
       debug('productSaved : ', productSaved);
       res.send(productSaved);
+    }, function error(err) {
+      debug('error : ', err);
     });
 }
 
