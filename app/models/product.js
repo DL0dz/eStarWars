@@ -18,4 +18,10 @@ productSchema.statics.saveProduct = function saveProduct(product) {
   return this.create(product);
 };
 
+productSchema.statics.modifyProduct = function modifyProduct(productId, productUpdatedInfos) {
+  return this
+    .findByIdAndUpdate(productId, productUpdatedInfos, {new: true})
+    .exec();
+};
+
 module.exports = mongoose.model('Product', productSchema);
