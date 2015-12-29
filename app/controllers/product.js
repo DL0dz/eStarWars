@@ -2,7 +2,7 @@ const debug = require('debug')('estarwars:controllers:product');
 const express = require('express');
 const router = module.exports = new express.Router();
 const Product = require('../models/product');
-const categories = ['lasers', 'helmets'];
+const categories = ['', 'lasers', 'helmets'];
 
 function showProducts(req, res) {
   const path = req.route.path;
@@ -51,7 +51,7 @@ function updateProduct(req, res) {
 }
 
 // ## Routing table
-categories.forEach(function(category) {
+categories.forEach(function callback(category) {
   router.route('/' + category)
     .get(showProducts);
 });
