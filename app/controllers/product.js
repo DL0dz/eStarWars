@@ -16,6 +16,15 @@ function showProducts(req, res) {
     });
 }
 
+function dashboardProducts(req, res) {
+  Product.getAllProducts()
+    .then(function callback(products) {
+      res.send(products);
+    }, function error(err) {
+      debug('error : ', err);
+    });
+}
+
 function createProduct(req, res) {
   const starWarsProduct = new Product({
     title: 'lukes Saber', // req.body.title
@@ -55,6 +64,9 @@ categories.forEach(function callback(category) {
   router.route('/' + category)
     .get(showProducts);
 });
+
+router.route('/dashboard')
+  .get(dashboardProducts);
 
 router.route('/api/products')
   .post(createProduct);
