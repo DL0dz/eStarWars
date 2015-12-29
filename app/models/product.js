@@ -24,4 +24,12 @@ productSchema.statics.modifyProduct = function modifyProduct(productId, productU
     .exec();
 };
 
+productSchema.statics.retrieveProducts = function retrieveProducts(category) {
+  return this
+    .find({published: true, category: category})
+    .sort({created_at: -1})
+    .limit(process.env.LIMIT_PRODUCTS)
+    .exec();
+};
+
 module.exports = mongoose.model('Product', productSchema);
