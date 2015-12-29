@@ -25,8 +25,14 @@ productSchema.statics.modifyProduct = function modifyProduct(productId, productU
 };
 
 productSchema.statics.retrieveProducts = function retrieveProducts(category) {
+  const query = {published: true};
+
+  if (category) {
+    query.category = category;
+  }
+
   return this
-    .find({published: true, category: category})
+    .find(query)
     .sort({created_at: -1})
     .limit(process.env.LIMIT_PRODUCTS)
     .exec();
