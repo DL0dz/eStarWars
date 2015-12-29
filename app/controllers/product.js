@@ -28,6 +28,7 @@ function createProduct(req, res) {
 function updateProduct(req, res) {
   const productId = '568161139668aa6a35dc5c10'; // req.params.id
   const productUpdatedInfos = {'category': 'cap', 'price': 349}; // req.body
+  debug('req.route :  : ', req.route.path);
 
   Product.modifyProduct(productId, productUpdatedInfos)
     .then(function callback(productUpdated) {
@@ -39,8 +40,8 @@ function updateProduct(req, res) {
 }
 
 // ## Routing table
-router.route('/products')
+router.route('/api/products')
   .post(createProduct);
 
-router.route('/products/:id')
+router.route('/api/products/:id')
   .put(updateProduct);
