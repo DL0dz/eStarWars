@@ -29,11 +29,15 @@ productSchema.statics.removeProduct = function removeProduct(productId) {
     .exec();
 };
 
-productSchema.statics.retrieveProducts = function retrieveProducts(category) {
+productSchema.statics.retrieveProducts = function retrieveProducts(category, tag) {
   const query = {published: true};
 
   if (category) {
     query.category = category;
+  }
+
+  if (tag) {
+    query.tags = { $in: [tag] };
   }
 
   return this

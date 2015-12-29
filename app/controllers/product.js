@@ -7,8 +7,9 @@ const categories = ['', 'lasers', 'helmets'];
 function showProducts(req, res) {
   const path = req.route.path;
   const category = path.slice(1, path.length);
+  const tag = req.query.tag;
 
-  Product.retrieveProducts(category)
+  Product.retrieveProducts(category, tag)
     .then(function callback(products) {
       res.send(products);
     }, function error(err) {
