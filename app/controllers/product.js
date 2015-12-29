@@ -59,6 +59,18 @@ function updateProduct(req, res) {
     });
 }
 
+function deleteProduct(req, res) {
+  const productId = req.params.id;
+
+  Product.removeProduct(productId)
+    .then(function callback(productDeleted) {
+      debug('productDeleted : ', productDeleted);
+      res.send(productDeleted);
+    }, function error(err) {
+      debug('error : ', err);
+    });
+}
+
 // ## Routing table
 categories.forEach(function callback(category) {
   router.route('/' + category)
@@ -72,4 +84,5 @@ router.route('/api/products')
   .post(createProduct);
 
 router.route('/api/products/:id')
-  .put(updateProduct);
+  .put(updateProduct)
+  .delete(deleteProduct);
