@@ -23,6 +23,7 @@ productSchema.statics.modifyProduct = function modifyProduct(productId, productU
     .findByIdAndUpdate(productId, productUpdatedInfos, {new: true})
     .exec();
 };
+
 productSchema.statics.removeProduct = function removeProduct(productId) {
   return this
     .findByIdAndRemove(productId)
@@ -52,6 +53,12 @@ productSchema.statics.getAllProducts = function getAllProducts() {
     .find()
     .sort({created_at: -1})
     .limit(process.env.LIMIT_PRODUCTS * 2)
+    .exec();
+};
+
+productSchema.statics.retrieveSingleProduct = function retrieveSingleProduct(productId) {
+  return this
+    .findById(productId)
     .exec();
 };
 
