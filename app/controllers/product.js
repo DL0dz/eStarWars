@@ -100,5 +100,5 @@ router.route('/api/products/:id')
   .put(updateProduct)
   .delete(deleteProduct);
 
-router.route('/:id')
+router.route('/products/:id')
   .get(singleProduct);
