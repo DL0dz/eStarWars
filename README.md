@@ -30,7 +30,6 @@ mongod --dbpath=./data/
 
 Lancer la base, un brunch watch pour builder les assets, et le serveur nodemon.
 ```shell
-cd data
 mongod --dbpath=./data/
 ```
 ```shell
