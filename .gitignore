@@ -43,4 +43,4 @@ node_modules
 doc
 
 # Mac cache file
-*.DS_Store*
+.DS_Store
