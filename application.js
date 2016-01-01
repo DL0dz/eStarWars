@@ -2,14 +2,12 @@ const env = require('node-env-file');
 const bodyParser = require('body-parser');
 const errorhandler = require('errorhandler');
 const express = require('express');
-
 const app = express();
 
 if (process.env.NODE_ENV !== 'production') {
   env('app/.env');
 }
 
-// Configure app
 app.set('views', './app/views');
 app.set('view engine', 'jade');
 
@@ -18,12 +16,14 @@ app.use(express.static('./public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+
 if (process.env.NODE_ENV !== 'production') {
   app.use(errorhandler({dumpExceptions: true, showStack: true}));
 }
 
 require('./app/models/connection');
 
+app.use('/', require('./app/controllers/user'));
 app.use('/', require('./app/controllers/product'));
 app.use('/', require('./app/controllers/contact'));
 
