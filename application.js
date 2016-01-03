@@ -1,4 +1,5 @@
 const env = require('node-env-file');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const errorhandler = require('errorhandler');
 const express = require('express');
@@ -6,6 +7,7 @@ const app = express();
 
 if (process.env.NODE_ENV !== 'production') {
   env('app/.env');
+  app.use(morgan('dev'));
 }
 
 app.set('views', './app/views');
