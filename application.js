@@ -21,13 +21,17 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(errorhandler({dumpExceptions: true, showStack: true}));
 }
 
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
-app.use(expressSession());
+app.use(expressSession({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 require('./app/models/connection');
 
