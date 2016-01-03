@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const errorhandler = require('errorhandler');
 const express = require('express');
 const app = express();
+const passport = require('passport');
+const passportLocal = require('passport-local');
 
 if (process.env.NODE_ENV !== 'production') {
   env('app/.env');
@@ -14,6 +16,9 @@ app.set('views', './app/views');
 app.set('view engine', 'jade');
 
 app.use(express.static('./public'));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
