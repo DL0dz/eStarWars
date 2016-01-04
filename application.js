@@ -36,42 +36,13 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new passportLocal.Strategy(function(username, password, done) {
-  // done(new Error('ouch !'));
-  if (username === password) {
-    done(null, {id: username, name: username});
-  } else {
-    done(null, null);
-  }
-}));
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  // User.findOne({ _id: user._id}, done);
-  done(null, {id: id, name: id});
-});
+require('./app/config/passport')(app, passport, passportLocal);
 
 app.get('/', function(req, res) {
   res.render('home', {
     isAuthenticated: req.isAuthenticated(),
     user: req.user,
   });
-});
-
-app.get('/login', function(req, res) {
-  res.render('login');
-});
-
-app.post('/login', passport.authenticate('local'), function(req, res) {
-  res.redirect('/');
-});
-
-app.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
 });
 
 app.use('/', require('./app/controllers/user'));
