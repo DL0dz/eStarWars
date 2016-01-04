@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt-nodejs');
 
 const userSchema = new Schema({
   firstname: { type: String, trim: true, required: true},
   lastname: { type: String, trim: true, required: true},
+  email: {type: String, trim: true, unique: true, required: true},
   password: { type: String, trim: true, required: true},
-  email: {type: String, trim: true, required: true},
   admin: Boolean,
   address: {
     street: {type: String, trim: true},
@@ -17,6 +18,18 @@ const userSchema = new Schema({
   cart: [{type: ObjectId, ref: 'Product'}],
 });
 
-const User = mongoose.model('User', userSchema);
+userSchema.statics.saveUser = function saveUser(newUser) {
+  return this.create(newUser);
+};
 
-module.exports = User;
+// generating a hash
+userSchema.statics.generateHash = function generateHash(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// checking if password is valid
+userSchema.methods.validPassword = function validPassword(password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
+module.exports = mongoose.model('User', userSchema);
