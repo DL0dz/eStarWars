@@ -2,10 +2,6 @@ extends layout
 
 block content
 
-  h1 hello home
-
-  if !isAuthenticated
-    a(href='/login') login page
-  else
-    p= user.name
-    a(href="/logout") log out
+  h1 home Page
+  if user
+    h2= user.firstname
