@@ -31,5 +31,20 @@ function createUser(req, res) {
     });
 }
 
+function login(req, res) {
+  res.render('login');
+}
+
+function logout(req, res) {
+  req.logout();
+  res.redirect('/');
+}
+
 router.route('/signup')
   .post(createUser);
+
+router.route('/login')
+  .get(login);
+
+router.route('/logout')
+  .get(logout);
