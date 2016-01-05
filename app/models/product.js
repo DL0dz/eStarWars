@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 const productSchema = new Schema({
   title: { type: String, trim: true, required: true},
   content: { type: String, trim: true, required: true},
-  photo: {data: Buffer, contentType: String, url: String},
-  photoSmall: {data: Buffer, contentType: String, url: String},
+  photo: {url: String},
   created_at: {type: Date, default: Date.now},
   published: Boolean,
   quantity: {type: Number, trim: true},
