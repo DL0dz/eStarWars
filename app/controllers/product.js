@@ -27,8 +27,11 @@ function dashboardProducts(req, res) {
 }
 
 function userStatus(req, res, next) {
+  if (!req.user) {
+    return res.redirect('/');
+  }
   if (!req.user.admin) {
-    res.redirect('/');
+    return res.redirect('/');
   }
   next();
 }
