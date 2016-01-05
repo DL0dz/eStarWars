@@ -3,10 +3,27 @@ const express = require('express');
 const router = module.exports = new express.Router();
 const Product = require('../models/product');
 const categories = ['', 'lasers', 'helmets'];
+const path = require('path');
+const crypto = require('crypto');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function destination(req, file, callback) {
+    callback(null, './app/assets/products/');
+  },
+  filename: function filename(req, file, cb) {
+    crypto.pseudoRandomBytes(16, function callback(err, raw) {
+      if (err) return cb(err);
+      cb(null, raw.toString('hex') + Date.now() + path.extname(file.originalname));
+    });
+  },
+});
+const upload = multer({ storage: storage}).single('productPhoto');
+
 
 function showProducts(req, res) {
-  const path = req.route.path;
-  const category = path.slice(1, path.length);
+  const routePath = req.route.path;
+  const category = routePath.slice(1, routePath.length);
   const tag = req.query.tag;
 
   Product.retrieveProducts(category, tag)
@@ -94,6 +111,16 @@ function singleProduct(req, res) {
     });
 }
 
+function uploadProductPhoto(req, res) {
+  upload(req, res, function(err) {
+    console.log('req.file: ', req.file);
+    if (err) {
+      return res.end('Error uploading file.');
+    }
+    res.redirect('/');
+  });
+}
+
 // ## Routing table
 categories.forEach(function callback(category) {
   router.route('/' + category)
@@ -112,3 +139,6 @@ router.route('/api/products/:id')
 
 router.route('/products/:id')
   .get(singleProduct);
+
+router.route('/api/photo')
+  .post(uploadProductPhoto);

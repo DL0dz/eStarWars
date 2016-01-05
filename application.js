@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const passport = require('passport');
 const passportLocal = require('passport-local');
-const multer = require('multer');
 
 const app = express();
 
