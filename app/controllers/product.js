@@ -113,11 +113,24 @@ function singleProduct(req, res) {
 
 function uploadProductPhoto(req, res) {
   upload(req, res, function(err) {
-    console.log('req.file: ', req.file);
     if (err) {
       return res.end('Error uploading file.');
     }
-    res.redirect('/');
+    if (!req.file) {
+      return res.redirect('/');
+    }
+    const productId = req.params.id;
+    const filePath = req.file.path;
+    const url = filePath.replace('app/assets', '');
+    const productUpdatedInfos = {'photo': url};
+
+    Product.modifyProduct(productId, productUpdatedInfos)
+    .then(function callback(productUpdated) {
+      debug('productUpdated : ', productUpdated);
+      res.send(productUpdated);
+    }, function error(erreur) {
+      debug('error : ', erreur);
+    });
   });
 }
 
@@ -140,5 +153,5 @@ router.route('/api/products/:id')
 router.route('/products/:id')
   .get(singleProduct);
 
-router.route('/api/photo')
-  .post(uploadProductPhoto);
+router.route('/api/photo/:id')
+  .post(uploadProductPhoto); // TODO : change method to UPDATE with ajax
