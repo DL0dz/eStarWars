@@ -1,4 +1,4 @@
-if !isAuthenticated
+if !user
   a(href='/login') login page
 else
   p Hello #{user.firstname}
