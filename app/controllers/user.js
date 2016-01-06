@@ -5,17 +5,17 @@ const User = require('../models/user');
 
 function createUser(req, res) {
   const newUser = new User({
-    firstname: 'Jean',
-    lastname: 'Jeannot',
-    email: 'jean@jeannot.com',
-    admin: false,
+    firstname: 'b',
+    lastname: 'b',
+    email: 'b@b.b',
+    admin: true,
     address: {
-      street: '6 rue Souchal',
-      zip: '92110',
-      city: 'Clichy',
-      state: 'France',
+      street: 'dantoin',
+      zip: '12345',
+      city: 'somewhere',
+      state: 'alliance',
     },
-    cart: [null],
+    cart: [],
   });
 
   const hash = User.generateHash('force'); // req.body.password
