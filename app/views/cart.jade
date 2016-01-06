@@ -1,0 +1,16 @@
+extends layout
+
+block content
+
+  h1 cart Page
+  if user
+    if cart.length
+      ul
+        each product in cart
+          li= product.title
+          li= product.category
+          li= product.tags
+          li= product.content
+          li= product.price
+    else
+      p Votre panier est vide
