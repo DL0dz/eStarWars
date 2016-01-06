@@ -1,5 +1,30 @@
+// Main Layout
 html, body
   font-family: Helvetica, sans-serif
   width: 100%
   height: 100%
   position: relative
+
+body
+  &.container
+    margin-top: 25px
+
+// Header Layout
+@media (min-width: 768px)
+  .nav
+    &.navbar-nav
+      &.navbar-right
+        margin-right: 0 !important
+
+.navbar-text
+  color: black !important
+        
+// Product Layout
+.product
+  width: 50%
+  margin: 0 auto
+
+// Login Page
+.login-form
+  .input-group
+    margin-bottom: 10px

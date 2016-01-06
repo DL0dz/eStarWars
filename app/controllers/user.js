@@ -5,14 +5,14 @@ const User = require('../models/user');
 
 function createUser(req, res) {
   const newUser = new User({
-    firstname: 'Jean',
-    lastname: 'Jeannot',
-    email: 'jean@jeannot.com',
-    admin: false,
+    firstname: 'Pierrick',
+    lastname: 'Turelier',
+    email: 'turelier.pierrick@gmail.com',
+    admin: true,
     address: {
-      street: '6 rue Souchal',
-      zip: '92110',
-      city: 'Clichy',
+      street: '12 Rue l\'Église',
+      zip: '77144',
+      city: 'Montévrain',
       state: 'France',
     },
     cart: [null],

@@ -2,6 +2,20 @@ extends layout
 
 block content
 
-  h1 home Page
-  if user
-    h2= user.firstname
+  .page-header
+    h1= category ? category : 'Accueil'   
+
+  each product in products
+    .well.product
+      .row
+        .col-md-4
+          img(src= product.photo.url)
+        .col-md-8
+          h3
+            a(href='/products/#{product.id}', target="_blank") #{product.title}
+              product.title
+          p= product.content
+          p= product.price
+          p= product.category
+          p= product.tags
+            
