@@ -3,3 +3,19 @@ extends layout
 block content
 
   h1 contact page
+
+  form(action='/api/sendmail', method='post')
+    div
+      label(for='nom') Nom :
+      input(type='text' name='from' value=user ? (user.firstname + ' ' +user.lastname) : '')
+    div
+      label(for='courriel') Email :
+      input(type='email' name='email' value=user ? user.email : '')
+    div
+      label(for='message') Sujet :
+      input(type='text' name='subject')
+    div
+      label(for='message') Message :
+      textarea(name='content')
+
+    button(type='submit') Envoyer
