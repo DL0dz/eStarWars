@@ -28,7 +28,7 @@ function showProducts(req, res) {
 
   Product.retrieveProducts(category, tag)
     .then(function callback(products) {
-      res.send(products);
+      res.render('home', {products: products, category: category, user: req.user});
     }, function error(err) {
       debug('error : ', err);
     });
@@ -58,7 +58,7 @@ function createProduct(req, res) {
     title: 'lukes Saber', // req.body.title
     content: 'The most popular jedi saber', // req.body.content
     created_at: Date.now(),
-    published: false, // req.body.published
+    published: true, // req.body.published
     quantity: 30, // req.body.quantity
     price: 499, // req.body.price
     category: 'lasers', // req.body.category
@@ -105,7 +105,7 @@ function singleProduct(req, res) {
   Product.retrieveSingleProduct(productId)
     .then(function callback(product) {
       debug('product : ', product);
-      res.send(product);
+      res.render('product', {product: product});
     }, function error(err) {
       debug('error : ', err);
     });

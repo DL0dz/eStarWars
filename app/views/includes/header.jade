@@ -1,5 +1,27 @@
-if !isAuthenticated
-  a(href='/login') login page
-else
-  p Hello #{user.firstname}
-  a(href="/logout") log out
+nav.navbar.navbar-default
+  .container
+    .navbar-header
+      a(href='/', class='navbar-brand') eStarWars
+    .navbar-collapse.collapse
+      ul.nav.navbar-nav
+        li.active 
+          a(href='/') Accueil
+        li
+          a(href='/lasers') Lasers
+        li
+          a(href='/helmets') Casques
+        li
+          a(href='/contact') Contact  
+      if user
+        ul.nav.navbar-nav.navbar-right
+          li
+            p.navbar-text Bonjour #{user.firstname}
+          li
+            a(href='/dashboard') Dashboard
+          li
+            a(href='/logout') Logout
+      else
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='/login') Login
+              
