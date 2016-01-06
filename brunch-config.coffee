@@ -7,7 +7,7 @@ module.exports = config:
   files:
     javascripts:
       joinTo:
-        'app.js': /^app/
+        'app.js': /^app\/javascripts\//
 
     stylesheets:
       joinTo:
