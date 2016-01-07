@@ -7,7 +7,11 @@ module.exports = config:
   files:
     javascripts:
       joinTo:
-        'app.js': /^app/
+        'app.js': /^app\/javascripts\//
+      order:
+       before:[
+         'app/javascripts/jquery-2.1.4.min.js'
+       ]
 
     stylesheets:
       joinTo:

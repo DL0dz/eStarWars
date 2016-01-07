@@ -25,6 +25,68 @@ body
   margin: 0 auto
 
 // Login Page
+.panel-login
+  max-width: 500px
+  margin: 0 auto
 .login-form
   .input-group
     margin-bottom: 10px
+
+// Dashboard Page
+.dashboard-table
+  text-transform: capitalize
+  .glyphicon-ok
+    color: green
+  .glyphicon-remove
+    color: red
+  .tag-column
+    display: inline-block
+    margin: 0
+  .tag-column, .btn
+    &:not(:last-child)
+      margin-right: 10px
+  .btn
+    .glyphicon-refresh:before
+      display: none
+      margin-right: 5px
+    &.active
+      .glyphicon-refresh:before
+        display: inline-block
+        -webkit-animation: rotate 1s linear infinite
+        -moz-animation: rotate 1s linear infinite
+        -ms-animation: rotate 1s linear infinite
+        -o-animation: rotate 1s linear infinite
+        animation: rotate 1s linear infinite
+        @-webkit-keyframes rotate
+          from
+            transform: rotate(0deg)
+          to
+            transform: rotate(360deg)
+        @-moz-keyframes rotate
+          from
+            transform: rotate(0deg)
+          to
+            transform: rotate(360deg)  
+        @-ms-keyframes rotate
+          from
+            transform: rotate(0deg)
+          to
+            transform: rotate(360deg)
+        @-o-keyframes rotate
+          from
+            transform: rotate(0deg)
+          to
+            transform: rotate(360deg)  
+        @keyframes rotate
+          from
+            transform: rotate(0deg)
+          to
+            transform: rotate(360deg)
+ 
+// Edit Product Page
+.edit-form
+  input
+    text-transform: capitalize
+      
+  
+     
