@@ -1,0 +1,28 @@
+extends layout
+
+block content
+
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title Éditer Produit
+    .panel-body.edit-form
+      form
+        .form-group
+          label Titre
+          input(type='text' class='form-control' placeholder='Titre' value='#{product.title}')= product.title
+        .form-group
+          label Description
+          input(type='text' class='form-control' placeholder='Description' value='#{product.content}')= product.content
+        .form-group
+          label Prix
+          input(type='text' class='form-control' placeholder='Prix' value='#{product.price}')= product.price
+        .form-group
+          label Quantité
+          input(type='text' class='form-control' placeholder='Quantité' value='#{product.quantity}')= product.quantity
+        .form-group
+          label Catégorie
+          input(type='text' class='form-control' placeholder='Cétégorie' value='#{product.category}')= product.category
+        .form-group
+          label Tags
+          input(type='text' class='form-control' placeholder='Tags' value='#{product.tags}')= product.tags
+        a(href='/products/#{product._id}?mode=edit' class='btn btn-sm btn-primary') Éditer

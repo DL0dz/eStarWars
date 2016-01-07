@@ -8,7 +8,9 @@ const expressSession = require('express-session');
 const passport = require('passport');
 const passportLocal = require('passport-local');
 
+
 const app = express();
+app.locals.moment = require('moment');
 
 app.set('views', './app/views');
 app.set('view engine', 'jade');
