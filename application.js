@@ -40,6 +40,7 @@ app.use(passport.session());
 
 require('./app/config/passport')(app, passport, passportLocal);
 
+app.use('/', require('./app/controllers/cart'));
 app.use('/', require('./app/controllers/user'));
 app.use('/', require('./app/controllers/product'));
 app.use('/', require('./app/controllers/contact'));
