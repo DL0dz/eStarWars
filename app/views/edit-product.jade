@@ -6,23 +6,33 @@ block content
     .panel-heading
       h3.panel-title Éditer Produit
     .panel-body.edit-form
-      form
+      form(id='edit-form' enctype='multipart/form-data' method='post')
         .form-group
           label Titre
-          input(type='text' class='form-control' placeholder='Titre' value='#{product.title}')= product.title
+          input(type='text' class='form-control' name='title' placeholder='Titre' value='#{product.title}')
         .form-group
           label Description
-          input(type='text' class='form-control' placeholder='Description' value='#{product.content}')= product.content
+          input(type='text' class='form-control' name='content' placeholder='Description' value='#{product.content}')
         .form-group
           label Prix
-          input(type='text' class='form-control' placeholder='Prix' value='#{product.price}')= product.price
+          input(type='text' class='form-control' name='price' placeholder='Prix' value='#{product.price}')
         .form-group
           label Quantité
-          input(type='text' class='form-control' placeholder='Quantité' value='#{product.quantity}')= product.quantity
+          input(type='text' class='form-control' name='quantity' placeholder='Quantité' value='#{product.quantity}')
         .form-group
           label Catégorie
-          input(type='text' class='form-control' placeholder='Cétégorie' value='#{product.category}')= product.category
+            .radio
+              label Lasers
+                input(type='radio' class='category' name='category' value='Lasers' checked='#{product.category}' == 'Lasers' ? '' : checked)
+            .radio
+              label Casques
+                input(type='radio' class='category' name='category' value='Helmets' checked='#{product.category}' == 'Helmets' ? '' : checked)
         .form-group
           label Tags
-          input(type='text' class='form-control' placeholder='Tags' value='#{product.tags}')= product.tags
-        a(href='/products/#{product._id}?mode=edit' class='btn btn-sm btn-primary') Éditer
+            .checkbox
+              label Alliance
+                input(type='checkbox' class='tag' name='tag1' value='Alliance' checked='#{product.tags[0]}' ? '' : checked)
+            .checkbox
+              label Jedi
+                input(type='checkbox' class='tag' name='tag2' value='Jedi' checked='#{product.tags[1]}' ? '' : checked)
+      a(href='/api/products/#{product._id}' class='btn btn-sm btn-primary btn-edit') Éditer
