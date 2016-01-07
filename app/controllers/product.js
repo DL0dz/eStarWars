@@ -28,19 +28,19 @@ function showProducts(req, res) {
 
   Product.retrieveProducts(category, tag)
     .then(function callback(products) {
-    res.render('home', {products: products, category: category, user: req.user});
-  }, function error(err) {
-    debug('error : ', err);
-  });
+      res.render('home', {products: products, category: category, user: req.user});
+    }, function error(err) {
+      debug('error : ', err);
+    });
 }
 
 function dashboardProducts(req, res) {
   Product.getAllProducts()
     .then(function callback(products) {
-    res.render('dashboard', {products: products, user: req.user});
-  }, function error(err) {
-    debug('error : ', err);
-  });
+      res.render('dashboard', {products: products, user: req.user});
+    }, function error(err) {
+      debug('error : ', err);
+    });
 }
 
 function userStatus(req, res, next) {
@@ -67,11 +67,11 @@ function createProduct(req, res) {
 
   Product.saveProduct(starWarsProduct)
     .then(function callback(productSaved) {
-    debug('productSaved : ', productSaved);
-    res.send(productSaved);
-  }, function error(err) {
-    debug('error : ', err);
-  });
+      debug('productSaved : ', productSaved);
+      res.send(productSaved);
+    }, function error(err) {
+      debug('error : ', err);
+    });
 }
 
 function updateProduct(req, res) {
@@ -80,11 +80,11 @@ function updateProduct(req, res) {
 
   Product.modifyProduct(productId, productUpdatedInfos)
     .then(function callback(productUpdated) {
-    debug('productUpdated : ', productUpdated);
-    res.send(productUpdated);
-  }, function error(err) {
-    debug('error : ', err);
-  });
+      debug('productUpdated : ', productUpdated);
+      res.send(productUpdated);
+    }, function error(err) {
+      debug('error : ', err);
+    });
 }
 
 function deleteProduct(req, res) {
@@ -92,11 +92,11 @@ function deleteProduct(req, res) {
 
   Product.removeProduct(productId)
     .then(function callback(productDeleted) {
-    debug('productDeleted : ', productDeleted);
-    res.send(productDeleted);
-  }, function error(err) {
-    debug('error : ', err);
-  });
+      debug('productDeleted : ', productDeleted);
+      res.send(productDeleted);
+    }, function error(err) {
+      debug('error : ', err);
+    });
 }
 
 function singleProduct(req, res) {
@@ -105,18 +105,17 @@ function singleProduct(req, res) {
 
   Product.retrieveSingleProduct(productId)
     .then(function callback(product) {
-    debug('product : ', product);
+      debug('product : ', product);
 
-    if (req.user) {
-      if (mode == 'edit' && req.user.admin) {
-        return res.render('edit-product', {product: product, user: req.user});
+      if (req.user) {
+        if (mode === 'edit' && req.user.admin) {
+          return res.render('edit-product', {product: product, user: req.user});
+        }
       }
-    }
-    
-    res.render('product', {product: product});
-  }, function error(err) {
-    debug('error : ', err);
-  });
+      res.render('product', {product: product});
+    }, function error(err) {
+      debug('error : ', err);
+    });
 }
 
 function uploadProductPhoto(req, res) {
@@ -134,11 +133,11 @@ function uploadProductPhoto(req, res) {
 
     Product.modifyProduct(productId, productUpdatedInfos)
       .then(function callback(productUpdated) {
-      debug('productUpdated : ', productUpdated);
-      res.send(productUpdated);
-    }, function error(erreur) {
-      debug('error : ', erreur);
-    });
+        debug('productUpdated : ', productUpdated);
+        res.send(productUpdated);
+      }, function error(erreur) {
+        debug('error : ', erreur);
+      });
   });
 }
 
