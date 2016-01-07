@@ -8,7 +8,9 @@ const expressSession = require('express-session');
 const passport = require('passport');
 const passportLocal = require('passport-local');
 
+
 const app = express();
+app.locals.moment = require('moment');
 
 app.set('views', './app/views');
 app.set('view engine', 'jade');
@@ -38,6 +40,7 @@ app.use(passport.session());
 
 require('./app/config/passport')(app, passport, passportLocal);
 
+app.use('/', require('./app/controllers/cart'));
 app.use('/', require('./app/controllers/user'));
 app.use('/', require('./app/controllers/product'));
 app.use('/', require('./app/controllers/contact'));

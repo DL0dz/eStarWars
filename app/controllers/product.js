@@ -37,7 +37,7 @@ function showProducts(req, res) {
 function dashboardProducts(req, res) {
   Product.getAllProducts()
     .then(function callback(products) {
-      res.send(products);
+      res.render('dashboard', {products: products, user: req.user});
     }, function error(err) {
       debug('error : ', err);
     });
@@ -75,8 +75,8 @@ function createProduct(req, res) {
 }
 
 function updateProduct(req, res) {
-  const productId = '568161139668aa6a35dc5c10'; // req.params.id
-  const productUpdatedInfos = {'category': 'cap', 'price': 349}; // req.body
+  const productId = req.params.id; // req.params.id
+  const productUpdatedInfos = req.body; // req.body
 
   Product.modifyProduct(productId, productUpdatedInfos)
     .then(function callback(productUpdated) {
@@ -101,10 +101,17 @@ function deleteProduct(req, res) {
 
 function singleProduct(req, res) {
   const productId = req.params.id;
+  const mode = req.query.mode;
 
   Product.retrieveSingleProduct(productId)
     .then(function callback(product) {
       debug('product : ', product);
+
+      if (req.user) {
+        if (mode === 'edit' && req.user.admin) {
+          return res.render('edit-product', {product: product, user: req.user});
+        }
+      }
       res.render('product', {product: product});
     }, function error(err) {
       debug('error : ', err);
@@ -125,12 +132,12 @@ function uploadProductPhoto(req, res) {
     const productUpdatedInfos = {'photo': url};
 
     Product.modifyProduct(productId, productUpdatedInfos)
-    .then(function callback(productUpdated) {
-      debug('productUpdated : ', productUpdated);
-      res.send(productUpdated);
-    }, function error(erreur) {
-      debug('error : ', erreur);
-    });
+      .then(function callback(productUpdated) {
+        debug('productUpdated : ', productUpdated);
+        res.send(productUpdated);
+      }, function error(erreur) {
+        debug('error : ', erreur);
+      });
   });
 }
 
