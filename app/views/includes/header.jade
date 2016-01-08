@@ -8,23 +8,15 @@ nav.navbar.navbar-default
     .navbar-collapse.collapse
       ul.nav.navbar-nav
         each val, key in leftMenu
-          if selected === val
-            li.active
-              a(href=val, title=key)= key
-          else
-            li
-              a(href=val, title=key)= key
+          li
+            a(href=val, title=key)= key
       if user
         ul.nav.navbar-nav.navbar-right
           li
             p.navbar-text Bonjour #{user.firstname}
           each val, key in rightMenu
-            if selected === val
-              li.active
-                a(href=val, title=key)= key
-            else
-              li
-                a(href=val, title=key)= key
+            li
+              a(href=val, title=key)= key
       else
         ul.nav.navbar-nav.navbar-right
           li
