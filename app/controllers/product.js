@@ -26,17 +26,9 @@ function showProducts(req, res) {
   const category = routePath.slice(1, routePath.length);
   const tag = req.query.tag;
 
-  if (category === 'lasers') {
-    var url = '/lasers';
-  } else if (category === 'helmets') {
-    var url = '/helmets';
-  } else {
-    var url = '/';
-  }
-
   Product.retrieveProducts(category, tag)
     .then(function callback(products) {
-      res.render('home', {products: products, category: category, user: req.user, url: url});
+      res.render('home', {products: products, category: category, user: req.user});
     }, function error(err) {
       debug('error : ', err);
     });
@@ -45,7 +37,7 @@ function showProducts(req, res) {
 function dashboardProducts(req, res) {
   Product.getAllProducts()
     .then(function callback(products) {
-      res.render('dashboard', {products: products, user: req.user, url: '/dashboard'});
+      res.render('dashboard', {products: products, user: req.user});
     }, function error(err) {
       debug('error : ', err);
     });
@@ -63,7 +55,7 @@ function userStatus(req, res, next) {
 
 function addProduct(req, res) {
   if (req.user) {
-    return res.render('add-product', {user: req.user, url: '/dashboard'});
+    return res.render('add-product', {user: req.user});
   }
   res.redirect('/');
 }
@@ -115,7 +107,7 @@ function singleProduct(req, res) {
 
       if (req.user) {
         if (mode === 'edit' && req.user.admin) {
-          return res.render('edit-product', {product: product, user: req.user, url: '/dashboard'});
+          return res.render('edit-product', {product: product, user: req.user});
         }
       }
       res.render('product', {product: product});
