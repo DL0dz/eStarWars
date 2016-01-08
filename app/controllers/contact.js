@@ -13,7 +13,7 @@ const smtpTransport = nodemailer.createTransport('SMTP', {
 });
 
 function contact(req, res) {
-  res.render('contact', {user: req.user, url: '/contact'});
+  res.render('contact', {user: req.user});
 }
 
 function sendMail(req, res) {
