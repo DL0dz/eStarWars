@@ -18,7 +18,7 @@ function createUser(req, res) {
     cart: [],
   });
 
-  const hash = User.generateHash('req.body.password');
+  const hash = User.generateHash(req.body.password);
   newUser.password = hash;
 
   User.saveUser(newUser)
