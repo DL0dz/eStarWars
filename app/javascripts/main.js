@@ -5,7 +5,6 @@
 })();
 
 // Dashboard Page
-
 // Button to remove a product
 (function() {
   function deleteProduct(event) {
