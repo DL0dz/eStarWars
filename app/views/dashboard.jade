@@ -2,9 +2,12 @@ extends layout
 
 block content
 
-  .panel.panel-default
-    .panel-heading
-      h3.panel-title Dashboard
+  ul#dashboard-tabs.nav.nav-tabs
+    li(role='presentation' class='active')
+      a(href='#products' data-toggle='tab') Produits
+    li(role='presentation')
+      a(href='#history' data-toggle='tab') Commandes
+  .panel(role='tabpanel' id='products' class='panel-default panel-dashboard active')
     .panel-body.dashboard-table
       a(href='/products/add' class='btn btn-lg btn-success') Ajouter Produit
       table.table.table-striped
@@ -32,4 +35,9 @@ block content
               a(href='/products/#{product._id}?mode=edit' class='btn btn-sm btn-primary') Éditer
               a(href='/api/products/#{product.id}' class='btn btn-sm btn-danger')
                 span.glyphicon.glyphicon-refresh Supprimer
+                
+  .panel(class='panel-default panel-dashboard' id='history' role='tabpanel')
+    .panel-body.dashboard-table
+      h1 Commandes
+      
                    

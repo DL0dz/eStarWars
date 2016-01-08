@@ -26,9 +26,17 @@ function showProducts(req, res) {
   const category = routePath.slice(1, routePath.length);
   const tag = req.query.tag;
 
+  if (category === 'lasers') {
+    var url = '/lasers';
+  } else if (category === 'helmets') {
+    var url = '/helmets';
+  } else {
+    var url = '/';
+  }
+
   Product.retrieveProducts(category, tag)
     .then(function callback(products) {
-      res.render('home', {products: products, category: category, user: req.user});
+      res.render('home', {products: products, category: category, user: req.user, url: url});
     }, function error(err) {
       debug('error : ', err);
     });
@@ -37,7 +45,7 @@ function showProducts(req, res) {
 function dashboardProducts(req, res) {
   Product.getAllProducts()
     .then(function callback(products) {
-      res.render('dashboard', {products: products, user: req.user});
+      res.render('dashboard', {products: products, user: req.user, url: '/dashboard'});
     }, function error(err) {
       debug('error : ', err);
     });
@@ -53,22 +61,20 @@ function userStatus(req, res, next) {
   next();
 }
 
-function createProduct(req, res) {
-  const starWarsProduct = new Product({
-    title: 'lukes Saber', // req.body.title
-    content: 'The most popular jedi saber', // req.body.content
-    created_at: Date.now(),
-    published: true, // req.body.published
-    quantity: 30, // req.body.quantity
-    price: 499, // req.body.price
-    category: 'lasers', // req.body.category
-    tags: ['jedi', 'alliance'], // req.body.tags
-  });
+function addProduct(req, res) {
+  if (req.user) {
+    return res.render('add-product', {user: req.user, url: '/dashboard'});
+  }
+  res.redirect('/');
+}
 
-  Product.saveProduct(starWarsProduct)
-    .then(function callback(productSaved) {
-      debug('productSaved : ', productSaved);
-      res.send(productSaved);
+function createProduct(req, res) {
+  const productAddedInfos = req.body;
+
+  Product.saveProduct(productAddedInfos)
+    .then(function callback(productAdded) {
+      debug('productAdded : ', productAdded);
+      res.send(productAdded);
     }, function error(err) {
       debug('error : ', err);
     });
@@ -109,7 +115,7 @@ function singleProduct(req, res) {
 
       if (req.user) {
         if (mode === 'edit' && req.user.admin) {
-          return res.render('edit-product', {product: product, user: req.user});
+          return res.render('edit-product', {product: product, user: req.user, url: '/dashboard'});
         }
       }
       res.render('product', {product: product});
@@ -149,6 +155,9 @@ categories.forEach(function callback(category) {
 
 router.route('/dashboard')
   .get(userStatus, dashboardProducts);
+
+router.route('/products/add')
+  .get(addProduct);
 
 router.route('/api/products')
   .post(createProduct);
