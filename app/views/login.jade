@@ -6,11 +6,15 @@ block content
     .panel-heading
       h3.panel-title Login
     .panel-body
-      form(action='' method='post' class='login-form')
+      - if (userCreated === true)
+        h1.h1-login
+          span.label.label-success Compte Créé
+    
+      form(action='/login' method='post' class='login-form')
         .input-group
           span.input-group-addon
             span.glyphicon.glyphicon-envelope
-          input(type='email' class="form-control" name='email' placeholder='Email')
+          input(type='email' class="form-control" name='email' placeholder='Email' value=userSaved ? userSaved.email : '')
         .input-group
           span.input-group-addon
             span.glyphicon.glyphicon-lock

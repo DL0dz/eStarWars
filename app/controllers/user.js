@@ -8,7 +8,7 @@ function createUser(req, res) {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     email: req.body.email,
-    admin: req.body.admin,
+    admin: false,
     address: {
       street: req.body.street,
       zip: req.body.zip,
@@ -24,7 +24,7 @@ function createUser(req, res) {
   User.saveUser(newUser)
     .then(function callback(userSaved) {
       debug('userSaved : ', userSaved);
-      res.render('login');
+      res.render('login', {userSaved: userSaved, userCreated: true});
     }, function error(err) {
       debug('error : ', err);
       res.send(err);
