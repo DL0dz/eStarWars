@@ -105,3 +105,49 @@
 
   $('.btn-edit').on('click', editProduct);
 })();
+
+// Add Page
+(function() {
+  function addProduct(event) {
+    event.preventDefault();
+
+    var url = this.getAttribute('href');
+    var form = $('#add-form')[0];
+    var dataElement = {};
+
+    for(var i=0; i < form.elements.length; i++){
+      if (form.elements[i].getAttribute('type') == 'radio' && !(form.elements[i].checked)) {
+        form.elements[i].value = '';
+        dataElement[i] = form.elements[i].value;
+      } else if (form.elements[i].getAttribute('type') == 'checkbox' && !(form.elements[i].checked)) {
+        form.elements[i].value = '';
+        dataElement[i] = form.elements[i].value;
+      } else if (form.elements[i] === '') {
+        return;
+      }
+      dataElement[i] = form.elements[i];
+    }
+
+    var data = {
+      title: dataElement[0].value,
+      content: dataElement[1].value,
+      created_at: Date.now(),
+      published: false,
+      quantity: dataElement[2].value, 
+      price: dataElement[3].value, 
+      category: dataElement[4].value || dataElement[5].value, 
+      tags: [dataElement[6].value, dataElement[7].value],
+    };
+
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: data,
+      success: function (data) {
+        window.location.href = '/dashboard';
+      }
+    });
+  }
+
+  $('.btn-add').on('click', addProduct);
+})();

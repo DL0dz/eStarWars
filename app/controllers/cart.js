@@ -23,13 +23,13 @@ function showUserCart(req, res) {
     const userId = req.user._id;
     User.retrieveCart(userId)
     .then(function callback(userInfos) {
-      res.render('cart', {user: req.user, cart: userInfos.cart});
+      res.render('cart', {user: req.user, cart: userInfos.cart, url: '/cart'});
     }, function error(err) {
       debug('error : ', err);
     });
   } else {
     debug('no user connected');
-    res.render('cart');
+    res.render('cart', {url: '/cart'});
   }
 }
 

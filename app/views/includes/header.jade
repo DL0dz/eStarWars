@@ -1,27 +1,30 @@
+-var leftMenu = { 'Accueil': '/', 'Lasers': '/lasers', 'Casques': '/helmets', 'Contact': '/contact', Panier: '/cart' };
+-var rightMenu = { 'Dashboard': '/dashboard', 'Logout': '/logout' };
+
 nav.navbar.navbar-default
   .container
     .navbar-header
       a(href='/', class='navbar-brand') eStarWars
     .navbar-collapse.collapse
       ul.nav.navbar-nav
-        li.active
-          a(href='/') Accueil
-        li
-          a(href='/lasers') Lasers
-        li
-          a(href='/helmets') Casques
-        li
-          a(href='/contact') Contact
-        li
-          a(href='/cart') Panier
+        each val, key in leftMenu
+          if selected === val
+            li.active
+              a(href=val, title=key)= key
+          else
+            li
+              a(href=val, title=key)= key
       if user
         ul.nav.navbar-nav.navbar-right
           li
             p.navbar-text Bonjour #{user.firstname}
-          li
-            a(href='/dashboard') Dashboard
-          li
-            a(href='/logout') Logout
+          each val, key in rightMenu
+            if selected === val
+              li.active
+                a(href=val, title=key)= key
+            else
+              li
+                a(href=val, title=key)= key
       else
         ul.nav.navbar-nav.navbar-right
           li

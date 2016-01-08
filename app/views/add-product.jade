@@ -1,0 +1,38 @@
+extends layout
+
+block content
+
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title Ajouter Produit
+    .panel-body.add-form
+      form(id='add-form' enctype='multipart/form-data' method='post')
+        .form-group
+          label Titre
+          input(type='text' class='form-control' name='title' placeholder='Titre')
+        .form-group
+          label Description
+          input(type='text' class='form-control' name='content' placeholder='Description')
+        .form-group
+          label Prix
+          input(type='text' class='form-control' name='price' placeholder='Prix')
+        .form-group
+          label Quantité
+          input(type='text' class='form-control' name='quantity' placeholder='Quantité')
+        .form-group
+          label Catégorie
+            .radio
+              label Lasers
+                input(type='radio' class='category' name='category' value='Lasers')
+            .radio
+              label Casques
+                input(type='radio' class='category' name='category' value='Helmets')
+        .form-group
+          label Tags
+            .checkbox
+              label Alliance
+                input(type='checkbox' class='tag' name='tag1' value='Alliance')
+            .checkbox
+              label Jedi
+                input(type='checkbox' class='tag' name='tag2' value='Jedi')
+      a(href='/api/products' class='btn btn-sm btn-primary btn-add') Ajouter
