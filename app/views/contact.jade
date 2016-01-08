@@ -2,20 +2,25 @@ extends layout
 
 block content
 
-  .page-header
-    h1 Contact
-
-  form(action='/api/sendmail', method='post')
-    div
-      label(for='nom') Nom :
-      input(type='text' name='from' value=user ? (user.firstname + ' ' +user.lastname) : '')
-    div
-      label(for='courriel') Email :
-      input(type='email' name='email' value=user ? user.email : '')
-    div
-      label(for='message') Sujet :
-      input(type='text' name='subject')
-    div
-      label(for='message') Message :
-      textarea(name='content')
-    button(type='submit') Envoyer
+  .panel.panel-default.panel-contact
+    .panel-heading
+      h3.panel-title Contact
+    .panel-body
+      form(action='/api/sendmail', method='post' class='contact-form')
+        .input-group
+          span#basic-addon1.input-group-addon
+            span.glyphicon.glyphicon-user
+          input(type='text' class='form-control' name='from' placeholder='Nom' value=user ? (user.firstname + ' ' +user.lastname) : '')
+        .input-group
+          span#basic-addon1.input-group-addon
+            span.glyphicon.glyphicon-envelope
+          input(type='email' class='form-control' name='email' placeholder='Email' value=user ? user.email : '')
+        .input-group
+          span#basic-addon1.input-group-addon
+            span.glyphicon.glyphicon-pencil
+          input(type='text' class='form-control' name='subject')
+        .input-group
+          span#basic-addon1.input-group-addon
+            span.glyphicon.glyphicon-edit
+          textarea(class='form-control text-area' name='content')
+        button(type='submit' class='btn btn-default') Envoyer

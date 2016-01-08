@@ -31,7 +31,7 @@ function sendMail(req, res) {
       res.end('error');
     } else {
       debug('Message sent: ' + response.message);
-      res.end('sent');
+      res.render('mail-sent');
     }
   });
 }
