@@ -4,14 +4,16 @@ nav.navbar.navbar-default
       a(href='/', class='navbar-brand') eStarWars
     .navbar-collapse.collapse
       ul.nav.navbar-nav
-        li.active 
+        li.active
           a(href='/') Accueil
         li
           a(href='/lasers') Lasers
         li
           a(href='/helmets') Casques
         li
-          a(href='/contact') Contact  
+          a(href='/contact') Contact
+        li
+          a(href='/cart') Panier
       if user
         ul.nav.navbar-nav.navbar-right
           li
@@ -24,4 +26,6 @@ nav.navbar.navbar-default
         ul.nav.navbar-nav.navbar-right
           li
             a(href='/login') Login
-              
+
+
+

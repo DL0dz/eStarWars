@@ -13,17 +13,16 @@ const smtpTransport = nodemailer.createTransport('SMTP', {
 });
 
 function contact(req, res) {
-  res.render('contact', {isAuthenticated: req.isAuthenticated(), user: req.user});
+  res.render('contact', {user: req.user});
 }
 
 function sendMail(req, res) {
   const mailOptions = {
-    from: 'Yoda ✔ <foo@blurdybloop.com>', // req.query.to
-    to: process.env.LIST_MAILS_ORDER, // req.query.to
-    subject: 'subject test', // req.query.subject
-    text: 'content test', // req.query.content
+    from: (req.body.from + ' <maytheforce@bewith.you>'),
+    to: process.env.LIST_MAILS_ORDER,
+    subject: req.body.subject,
+    text: ('message reçu de la part de ' + req.body.email + ' : \n\n' + req.body.content),
   };
-
   debug(mailOptions);
 
   smtpTransport.sendMail(mailOptions, function callback(error, response) {

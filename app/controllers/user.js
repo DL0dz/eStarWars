@@ -15,7 +15,7 @@ function createUser(req, res) {
       city: 'Montévrain',
       state: 'France',
     },
-    cart: [null],
+    cart: [],
   });
 
   const hash = User.generateHash('force'); // req.body.password
