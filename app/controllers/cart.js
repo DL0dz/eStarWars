@@ -8,6 +8,7 @@ function showUserCart(req, res) {
     const userId = req.user._id;
     User.retrieveCart(userId)
     .then(function callback(userInfos) {
+      debug('userInfos.cart : ', userInfos.cart);
       res.render('cart', {user: req.user, cart: userInfos.cart});
     }, function error(err) {
       debug('error : ', err);
@@ -18,6 +19,26 @@ function showUserCart(req, res) {
   }
 }
 
+function addToCart(req, res) {
+  if (req.user) {
+    const userId = req.user._id;
+    const productId = req.params.id;
+    const productQuantity = req.body.quantity;
+    User.addToCart(userId, productId, productQuantity)
+    .then(function callback(userInfos) {
+      debug('userInfos.cart : ', userInfos.cart);
+      res.render('cart', {user: req.user, cart: userInfos.cart});
+    }, function error(err) {
+      debug('error : ', err);
+    });
+  } else {
+    debug('no user connected');
+    res.render('cart');
+  }
+}
 
 router.route('/cart')
 .get(showUserCart);
+
+router.route('/api/cart/add/:id')
+.put(addToCart);
