@@ -39,4 +39,11 @@ userSchema.statics.retrieveCart = function retrieveCart(userId) {
     .exec();
 };
 
+userSchema.statics.addToCart = function addToCart(userId, productId) {
+  return this
+    .findByIdAndUpdate(userId, {$addToSet: {'cart': productId}}, {new: true})
+    .populate('cart')
+    .exec();
+};
+
 module.exports = mongoose.model('User', userSchema);
