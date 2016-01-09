@@ -5,12 +5,22 @@ block content
   h1 cart Page
   if user
     if cart.length
-      ul
-        each product in cart
-          li= product.title
-          li= product.category
-          li= product.tags
-          li= product.content
-          li= product.price
+      .panel(role='tabpanel' id='products' class='panel-default panel-dashboard active')
+        .panel-body.dashboard-table
+          table.table.table-striped
+            thead
+              tr
+                th Produit
+                th Catégorie
+                th tags
+                th Infos
+                th Prix
+              each product in cart
+                tr
+                  td= product.title
+                  td= product.category
+                  td= product.tags
+                  td= product.content
+                  td= product.price
     else
       p Votre panier est vide
