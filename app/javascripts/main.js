@@ -85,10 +85,10 @@
 
     var data = {
       title: dataElement[0].value,
-      content: dataElement[1].value, 
-      quantity: dataElement[2].value, 
-      price: dataElement[3].value, 
-      category: dataElement[4].value || dataElement[5].value, 
+      content: dataElement[1].value,
+      quantity: dataElement[2].value,
+      price: dataElement[3].value,
+      category: dataElement[4].value || dataElement[5].value,
       tags: [dataElement[6].value, dataElement[7].value],
     };
 
@@ -132,9 +132,9 @@
       content: dataElement[1].value,
       created_at: Date.now(),
       published: false,
-      quantity: dataElement[2].value, 
-      price: dataElement[3].value, 
-      category: dataElement[4].value || dataElement[5].value, 
+      quantity: dataElement[2].value,
+      price: dataElement[3].value,
+      category: dataElement[4].value || dataElement[5].value,
       tags: [dataElement[6].value, dataElement[7].value],
     };
 
@@ -149,4 +149,23 @@
   }
 
   $('.btn-add').on('click', addProduct);
+})();
+
+// add product to the cart
+(function() {
+  function addToCart(event) {
+    event.preventDefault();
+    var url = this.parentNode.getAttribute('action');
+    var quantity = this.previousElementSibling.lastElementChild.value;
+    $.ajax({
+      url: url,
+      type: 'PUT',
+      data: {quantity: quantity},
+      success: function (data) {
+        console.log('data : ', data);
+      }
+    });
+  }
+
+  $('.js-addToCart').on('click', addToCart);
 })();
