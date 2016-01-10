@@ -37,8 +37,28 @@ function addToCart(req, res) {
   }
 }
 
+function removeFromCart(req, res) {
+  if (req.user) {
+    const userId = req.user._id;
+    const productId = req.params.id;
+    User.removeFromCart(userId, productId)
+    .then(function callback(userInfos) {
+      debug('userInfos.cart : ', userInfos.cart);
+      res.render('cart', {user: req.user, cart: userInfos.cart});
+    }, function error(err) {
+      debug('error : ', err);
+    });
+  } else {
+    debug('no user connected');
+    res.render('cart');
+  }
+}
+
 router.route('/cart')
 .get(showUserCart);
 
 router.route('/api/cart/add/:id')
 .put(addToCart);
+
+router.route('/api/cart/remove/:id')
+.put(removeFromCart);
