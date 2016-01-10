@@ -63,41 +63,58 @@
 
 // Edit Product Page
 (function() {
+
+  // Initialize photo file input
+  $('#photo-input').fileinput({'showUpload':false, 'previewFileType':'any'});
+
   function editProduct(event) {
     event.preventDefault();
 
     var url = this.getAttribute('href');
-    var form = $('#edit-form')[0];
+    var inputs = document.getElementsByTagName('input');
     var dataElement = {};
 
-    for(var i=0; i < form.elements.length; i++){
-      if (form.elements[i].getAttribute('type') == 'radio' && !(form.elements[i].checked)) {
-        form.elements[i].value = '';
-        dataElement[i] = form.elements[i].value;
-      } else if (form.elements[i].getAttribute('type') == 'checkbox' && !(form.elements[i].checked)) {
-        form.elements[i].value = '';
-        dataElement[i] = form.elements[i].value;
-      } else if (form.elements[i] === '') {
+    for(var i=0; i < inputs.length; i++){
+      if (inputs[i].getAttribute('type') == 'radio' && !(inputs[i].checked)) {
+        inputs[i].value = '';
+        dataElement[i] = inputs[i].value;
+      } else if (inputs[i].getAttribute('type') == 'checkbox' && !(inputs[i].checked)) {
+        inputs[i].value = '';
+        dataElement[i] = inputs[i].value;
+      } else if (inputs[i] === '') {
         return;
       }
-      dataElement[i] = form.elements[i];
+      dataElement[i] = inputs[i];
     }
 
-    var data = {
-      title: dataElement[0].value,
-      content: dataElement[1].value, 
-      quantity: dataElement[2].value, 
-      price: dataElement[3].value, 
-      category: dataElement[4].value || dataElement[5].value, 
-      tags: [dataElement[6].value, dataElement[7].value],
+    var photo = dataElement[0].files[0];
+    var photoData = new FormData();
+    photoData.append('productPhoto', photo);
+
+    var text = {
+      title: dataElement[1].value,
+      content: dataElement[2].value, 
+      quantity: dataElement[3].value, 
+      price: dataElement[4].value, 
+      category: dataElement[5].value || dataElement[6].value, 
+      tags: [dataElement[7].value, dataElement[8].value],
     };
 
     $.ajax({
       url: url,
       type: 'PUT',
-      data: data,
+      data: text,
       success: function (data) {
-        window.location.href = '/dashboard';
+        $.ajax({
+          url: '/api/photo/' + data._id,
+          type: 'POST',
+          data: photoData,
+          contentType: false,
+          processData: false,
+          success: function (data) {
+            window.location.href = '/dashboard';
+          }
+        });
       }
     });
   }
@@ -158,7 +175,7 @@
           contentType: false,
           processData: false,
           success: function (data) {
-            window.location.href = '/dashboard';
+            
           }
         });
       }
