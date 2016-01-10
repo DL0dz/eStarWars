@@ -10,7 +10,7 @@ function showUserCart(req, res) {
     User.retrieveCart(userId)
     .then(function callback(userInfos) {
       if (routePath === '/buy') {
-        return res.render('confirm', {user: req.user, cart: userInfos.cart});
+        return res.render('buy', {user: req.user, cart: userInfos.cart});
       }
       res.render('cart', {user: req.user, cart: userInfos.cart});
     }, function error(err) {
