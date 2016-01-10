@@ -119,6 +119,7 @@ function singleProduct(req, res) {
 function uploadProductPhoto(req, res) {
   upload(req, res, function(err) {
     if (err) {
+      debug('error : ', err);
       return res.end('Error uploading file.');
     }
     if (!req.file) {
@@ -132,7 +133,7 @@ function uploadProductPhoto(req, res) {
     Product.modifyProduct(productId, productUpdatedInfos)
       .then(function callback(productUpdated) {
         debug('productUpdated : ', productUpdated);
-        res.send(productUpdated);
+        res.redirect('/dashboard');
       }, function error(erreur) {
         debug('error : ', erreur);
       });

@@ -35,6 +35,7 @@
     "autoprefixer": "^5.2.0",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.14.1",
+    "bootstrap-fileinput": "git+https://github.com/PierrickGT/bootstrap-fileinput.git",
     "bootstrap-sass": "^3.3.6",
     "bootstrap-switch": "^3.3.2",
     "brunch": "^1.8.5",

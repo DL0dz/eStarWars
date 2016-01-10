@@ -8,6 +8,9 @@ block content
     .panel-body.edit-form
       form(id='edit-form' enctype='multipart/form-data' method='post')
         .form-group
+              label(class='control-label') Photo
+              input(type='file' id='photo-input' class='file' name='productPhoto')
+        .form-group
           label Titre
           input(type='text' class='form-control' name='title' placeholder='Titre' value='#{product.title}')
         .form-group
@@ -23,16 +26,16 @@ block content
           label Catégorie
             .radio
               label Lasers
-                input(type='radio' class='category' name='category' value='Lasers' checked='#{product.category}' == 'Lasers' ? '' : checked)
+                input(type='radio' class='category' name='category' value='lasers' checked='#{product.category}' == 'lasers' ? '' : checked)
             .radio
               label Casques
-                input(type='radio' class='category' name='category' value='Helmets' checked='#{product.category}' == 'Helmets' ? '' : checked)
+                input(type='radio' class='category' name='category' value='helmets' checked='#{product.category}' == 'helmets' ? '' : checked)
         .form-group
           label Tags
             .checkbox
               label Alliance
-                input(type='checkbox' class='tag' name='tag1' value='Alliance' checked='#{product.tags[0]}' ? '' : checked)
+                input(type='checkbox' class='tag' name='tag1' value='alliance' checked='#{product.tags[0]}' ? '' : checked)
             .checkbox
               label Jedi
-                input(type='checkbox' class='tag' name='tag2' value='Jedi' checked='#{product.tags[1]}' ? '' : checked)
+                input(type='checkbox' class='tag' name='tag2' value='jedi' checked='#{product.tags[1]}' ? '' : checked)
       a(href='/api/products/#{product._id}' class='btn btn-sm btn-primary btn-edit') Éditer
