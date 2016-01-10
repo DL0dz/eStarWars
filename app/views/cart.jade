@@ -2,28 +2,39 @@ extends layout
 
 block content
 
-  h1 cart Page
+  h1 Panier
   if user
     if cart.length
+      - var total = 0
       .panel(role='tabpanel' id='products' class='panel-default panel-dashboard active')
-        .panel-body.dashboard-table
-          table.table.table-striped
+        .panel-body
+          table.table.table-striped.table-cart
             thead
               tr
                 th Produit
                 th Catégorie
                 th tags
                 th Infos
-                th Prix
+                th.td-cart--right Prix
                 th Supprimer
+                th Aperçu
               each product in cart
+                - total += product.price
                 tr(data-id='#{product._id}')
                   td= product.title
                   td= product.category
                   td= product.tags
                   td= product.content
-                  td= product.price
+                  td.td-cart--right.js-product-price(data-id='#{product._id}')= product.price
                   td
                     a.js-removeFromCart(href='api/cart/remove/#{product._id}') ❌
+            tr
+              th
+              th
+              th
+              th.td-cart--right Total :
+              th.td-cart--right.js-total= total
+              th
+              th
     else
       p Votre panier est vide
