@@ -12,7 +12,7 @@ nav.navbar.navbar-default
             a(href=val, title=key)= key
         li
           a(href='/cart') Panier
-          strong= user ? user.cart.length : 0
+          strong.js-cart-quantity= user ? user.cart.length : 0
       if user
         ul.nav.navbar-nav.navbar-right
           li
