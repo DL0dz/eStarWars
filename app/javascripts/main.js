@@ -162,7 +162,6 @@
       type: 'PUT',
       data: {quantity: quantity},
       success: function (data) {
-        console.log('data : ', data);
       }
     });
   }
@@ -181,7 +180,16 @@
       url: url,
       type: 'PUT',
       success: function (data) {
+
+        var cartProductQuantity = $('.js-cart-quantity').text();
+        var productPrice = $('.js-product-price[data-id=' + productId + ']').text();
+        var totalPrice = $('.js-total').text();
+
         $('tr[data-id=' + productId + ']').addClass('js-product--remove').fadeOut(1000);
+        $('.js-cart-quantity').text(cartProductQuantity - 1);
+
+        $('.js-total').text(totalPrice - productPrice);
+
       }
     });
   }
