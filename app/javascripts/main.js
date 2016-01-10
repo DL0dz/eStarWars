@@ -93,10 +93,10 @@
 
     var text = {
       title: dataElement[1].value,
-      content: dataElement[2].value, 
-      quantity: dataElement[3].value, 
-      price: dataElement[4].value, 
-      category: dataElement[5].value || dataElement[6].value, 
+      content: dataElement[2].value,
+      quantity: dataElement[3].value,
+      price: dataElement[4].value,
+      category: dataElement[5].value || dataElement[6].value,
       tags: [dataElement[7].value, dataElement[8].value],
     };
 
@@ -157,9 +157,9 @@
       content: dataElement[2].value,
       created_at: Date.now(),
       published: false,
-      quantity: dataElement[3].value, 
-      price: dataElement[4].value, 
-      category: dataElement[5].value || dataElement[6].value, 
+      quantity: dataElement[3].value,
+      price: dataElement[4].value,
+      category: dataElement[5].value || dataElement[6].value,
       tags: [dataElement[7].value, dataElement[8].value],
     };
 
@@ -183,4 +183,50 @@
   }
 
   $('.btn-add').on('click', addProduct);
+})();
+
+// add product to the cart
+(function() {
+  function addToCart(event) {
+    event.preventDefault();
+    var url = this.parentNode.getAttribute('action');
+    var quantity = this.previousElementSibling.lastElementChild.value;
+    $.ajax({
+      url: url,
+      type: 'PUT',
+      data: {quantity: quantity},
+      success: function (data) {
+      }
+    });
+  }
+
+  $('.js-addToCart').on('click', addToCart);
+})();
+
+// remove product from the cart
+(function() {
+  function removeFromCart(event) {
+    event.preventDefault();
+    var url = this.getAttribute('href');
+    var productId = url.split('/').pop();
+
+    $.ajax({
+      url: url,
+      type: 'PUT',
+      success: function (data) {
+
+        var cartProductQuantity = $('.js-cart-quantity').text();
+        var productPrice = $('.js-product-price[data-id=' + productId + ']').text();
+        var totalPrice = $('.js-total').text();
+
+        $('tr[data-id=' + productId + ']').addClass('js-product--remove').fadeOut(1000);
+        $('.js-cart-quantity').text(cartProductQuantity - 1);
+
+        $('.js-total').text(totalPrice - productPrice);
+
+      }
+    });
+  }
+
+  $('.js-removeFromCart').on('click', removeFromCart);
 })();

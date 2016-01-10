@@ -1,0 +1,56 @@
+extends layout
+
+block content
+
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title Confirmation de commande
+    .panel-body
+      if user
+        form(action='/confirm' method='post')
+          h5 Votre nom
+          .input-group
+            span.input-group-addon
+              span.glyphicon.glyphicon-user
+            input(type='text' class="form-control" name='lastname' placeholder='Nom' pattern='^[^\W\d_]+$' value=user.lastname ? user.lastname : '' required)
+            input(type='text' class="form-control" name='firstname' placeholder='Prénom' pattern='^[^\W\d_]+$' value=user.firstname ? user.firstname : '' required)
+          h5 Votre adresse
+          .input-group
+            span.input-group-addon
+              span.glyphicon.glyphicon-home
+            input(type='text' class="form-control" name='street' placeholder='Rue' value=user.address.street ? user.address.street : '' required)
+            input(type='text' class="form-control" name='zip' placeholder='Code Postal' pattern='[0-9]{5}' maxlength='5' value=user.address.zip ? user.address.zip : '' required)
+            input(type='text' class="form-control" name='city' placeholder='Ville' pattern='^[^\W\d_]+$' value=user.address.city ? user.address.city : '' required)
+            select(class='form-control select-control' name='state' value=user.address.state ? user.address.state : '' required)
+              option(value='Belgique') Belgique
+              option(value='Canada') Canada
+              option(value='France') France
+              option(value='Suisse') Suisse
+          h5 Vos informations de paiement
+          .input-group
+            span.input-group-addon
+              span.glyphicon.glyphicon-credit-card
+            input(type='text' class="form-control" name='card' placeholder='Numéro de carte' pattern='[0-9]{16}' maxlength='16' autofocus)
+          .input-group
+            label Date d'expiration
+            select.select-control(name='month' placeholder='Mois')
+                -var month = 12
+                - for (var i = 1; i < month + 1; i++) {
+                    if (i < 10)
+                      option(value=i)= '0' + i
+                    else
+                      option(value=i)= i
+                - }
+            select.select-control(name='year' placeholder='Année')
+                -var year = 2016
+                - for (var i = 2016; i < year + 5; i++) {
+                    option(value=i)= i
+                - }
+          .input-group
+            label(for='crypto') Code de vérification
+            input(type='text' name='crypto' id='crypto' pattern='[0-9]{3}' maxlength='3'  size='3')
+          -var total = 0
+          each product in cart
+            - total += product.price
+          h4 Montant total : #{total}
+          button.btn.btn-default.btn-lg.btn-success(type='submit') Acheter

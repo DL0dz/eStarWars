@@ -1,10 +1,8 @@
 extends layout
 
 block content
-  - function stringify(p) { return p.slice(1, -1); };
-  
   .page-header
-    h1= category ? category : 'Accueil'   
+    h1= category ? category : 'Accueil'
 
   each product in products
     .well.product
@@ -28,4 +26,17 @@ block content
           p Tags:
             each tag in product.tags
               span.product-tag= tag
-            
+          p= product.price
+          p= product.category
+          p= product.tags
+      .row
+        form.contact-form(action='/api/cart/add/#{product._id}', method='post')
+          .input-group
+            span.input-group-addon
+              span quantité
+            select.form-control.select-control(name='quantity')
+              -var quantity = product.quantity
+              - for (var i = 1; i < product.quantity + 1; i++) {
+                  option(value=i)= i
+              - }
+          button.js-addToCart.btn.btn-success(type='submit') Ajouter au panier

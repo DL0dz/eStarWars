@@ -10,6 +10,10 @@ const orderSchema = new Schema({
   finalized: Boolean,
 });
 
+orderSchema.statics.registerOrder = function registerOrder(order) {
+  return this.create(order);
+};
+
 const Order = mongoose.model('Order', orderSchema);
 
 module.exports = Order;

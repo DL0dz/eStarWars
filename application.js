@@ -45,6 +45,7 @@ app.use('/', require('./app/controllers/cart'));
 app.use('/', require('./app/controllers/user'));
 app.use('/', require('./app/controllers/product'));
 app.use('/', require('./app/controllers/contact'));
+app.use('/', require('./app/controllers/order'));
 
 // Errors handling
 
