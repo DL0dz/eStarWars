@@ -8,6 +8,9 @@ block content
     .panel-body.add-form
       form(id='add-form' enctype='multipart/form-data' method='post')
         .form-group
+              label(class='control-label') Photo
+              input(type='file' id='photo-input' class='file' name='productPhoto')
+        .form-group
           label Titre
           input(type='text' class='form-control' name='title' placeholder='Titre')
         .form-group
@@ -15,10 +18,10 @@ block content
           input(type='text' class='form-control' name='content' placeholder='Description')
         .form-group
           label Prix
-          input(type='text' class='form-control' name='price' placeholder='Prix')
+          input(type='text' class='form-control' name='price' placeholder='Prix' pattern='^(0|[1-9][0-9]*)$')
         .form-group
           label Quantité
-          input(type='text' class='form-control' name='quantity' placeholder='Quantité')
+          input(type='text' class='form-control' name='quantity' placeholder='Quantité' pattern='^(0|[1-9][0-9]*)$')
         .form-group
           label Catégorie
             .radio
