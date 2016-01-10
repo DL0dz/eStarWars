@@ -15,12 +15,15 @@ block content
                 th tags
                 th Infos
                 th Prix
+                th Supprimer
               each product in cart
-                tr
+                tr(data-id='#{product._id}')
                   td= product.title
                   td= product.category
                   td= product.tags
                   td= product.content
                   td= product.price
+                  td
+                    a.js-removeFromCart(href='api/cart/remove/#{product._id}') ❌
     else
       p Votre panier est vide
