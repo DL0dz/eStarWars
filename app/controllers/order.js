@@ -30,8 +30,7 @@ function registerOrder(req, res) {
     Order.registerOrder(newOrder)
     .then(function cb(orderSaved) {
       debug('orderSaved : ', orderSaved);
-      res.send(orderSaved);
-      // res.render('confirm', {order: orderSaved, user: req.user});
+      res.render('confirm', {order: orderSaved, user: req.user});
     }, function error(err) {
       debug('error : ', err);
     });
