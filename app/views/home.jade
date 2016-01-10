@@ -9,17 +9,17 @@ block content
     .well.product
       .row
         .col-md-4
-          img(src= product.photo.url)
+          img(src='#{product.photo}')
         .col-md-8
           h3
-            a(href='/products/#{product.id}', target="_blank") #{product.title}
+            a(href='/products/#{product.id}', target='_blank') #{product.title}
               product.title
           p= product.content
           p Prix:
             span.product-price #{product.price} Crédits Galactiques
           p Catégorie:
             span.product-category
-              a(href='/#{product.category}', target="_blank") #{product.category}
+              a(href='/#{product.category}', target='_blank') #{product.category}
           p Tags:
             each tag in product.tags
               span.product-tag= tag
