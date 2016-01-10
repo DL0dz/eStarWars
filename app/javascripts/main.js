@@ -169,3 +169,22 @@
 
   $('.js-addToCart').on('click', addToCart);
 })();
+
+// remove product from the cart
+(function() {
+  function removeFromCart(event) {
+    event.preventDefault();
+    var url = this.getAttribute('href');
+    var productId = url.split('/').pop();
+
+    $.ajax({
+      url: url,
+      type: 'PUT',
+      success: function (data) {
+        $('tr[data-id=' + productId + ']').addClass('js-product--remove').fadeOut(1000);
+      }
+    });
+  }
+
+  $('.js-removeFromCart').on('click', removeFromCart);
+})();
