@@ -112,7 +112,7 @@
           contentType: false,
           processData: false,
           success: function (data) {
-            window.location.href = '/dashboard';
+            window.location = '/dashboard';
           }
         });
       }
@@ -175,7 +175,7 @@
           contentType: false,
           processData: false,
           success: function (data) {
-            
+            window.location = '/dashboard';
           }
         });
       }
