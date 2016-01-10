@@ -6,9 +6,12 @@ const User = require('../models/user');
 function showUserCart(req, res) {
   if (req.user) {
     const userId = req.user._id;
+    const routePath = req.route.path;
     User.retrieveCart(userId)
     .then(function callback(userInfos) {
-      debug('userInfos.cart : ', userInfos.cart);
+      if (routePath === '/buy') {
+        return res.render('confirm', {user: req.user, cart: userInfos.cart});
+      }
       res.render('cart', {user: req.user, cart: userInfos.cart});
     }, function error(err) {
       debug('error : ', err);
@@ -62,3 +65,6 @@ router.route('/api/cart/add/:id')
 
 router.route('/api/cart/remove/:id')
 .put(removeFromCart);
+
+router.route('/buy')
+.get(showUserCart);
