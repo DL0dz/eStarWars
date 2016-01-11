@@ -8,7 +8,7 @@ function createUser(req, res) {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     email: req.body.email,
-    admin: false,
+    admin: true, // Should be set to false, allows to make tests
     address: {
       street: req.body.street,
       zip: req.body.zip,
