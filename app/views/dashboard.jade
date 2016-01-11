@@ -6,13 +6,13 @@ block content
     li(role='presentation' class='active')
       a(href='#products' data-toggle='tab') Produits
     li(role='presentation')
-      a(href='#history' data-toggle='tab') Commandes
+      a.js-panel-dashboard(href='#history' data-toggle='tab') Commandes
   .panel(role='tabpanel' id='products' class='panel-default panel-dashboard active')
     .panel-body.dashboard-table
       a(href='/products/add' class='btn btn-lg btn-success') Ajouter Produit
       table.table.table-striped
         thead
-          tr 
+          tr
             th Publié
             th Produit
             th Ajouté le
@@ -28,16 +28,23 @@ block content
             td= moment(product.created_at).format('DD/MM/YYYY')
             td= product.quantity
             td= product.category
-            td 
+            td
               each tag in product.tags
                 p.tag-column= tag
-            th 
+            th
               a(href='/products/#{product._id}?mode=edit' class='btn btn-sm btn-primary') Éditer
               a(href='/api/products/#{product.id}' class='btn btn-sm btn-danger')
                 span.glyphicon.glyphicon-refresh Supprimer
-                
+
   .panel(class='panel-default panel-dashboard' id='history' role='tabpanel')
     .panel-body.dashboard-table
-      h1 Commandes
-      
-                   
+      table.table.table-striped
+        thead
+            tr
+              th Num&eacute;ro de commande
+              th Email du Client
+              th Prix total
+              th Finalisée
+          tbody.js-history-infos
+
+
