@@ -17,19 +17,19 @@ block content
           label Description
           input(type='text' class='form-control' name='content' placeholder='Description' value='#{product.content}')
         .form-group
-          label Prix
-          input(type='text' class='form-control' name='price' placeholder='Prix' value='#{product.price}')
-        .form-group
           label Quantité
           input(type='text' class='form-control' name='quantity' placeholder='Quantité' value='#{product.quantity}')
+        .form-group
+          label Prix
+          input(type='text' class='form-control' name='price' placeholder='Prix' value='#{product.price}')
         .form-group
           label Catégorie
             .radio
               label Lasers
-                input(type='radio' class='category' name='category' value='Lasers' checked='#{product.category}' == 'Lasers' ? '' : checked)
+                input(type='radio' class='category' name='category' value='lasers' checked='#{product.category}' == 'Lasers' ? '' : checked)
             .radio
               label Casques
-                input(type='radio' class='category' name='category' value='Helmets' checked='#{product.category}' == 'Helmets' ? '' : checked)
+                input(type='radio' class='category' name='category' value='helmets' checked='#{product.category}' == 'Helmets' ? '' : checked)
         .form-group
           label Tags
             .checkbox
