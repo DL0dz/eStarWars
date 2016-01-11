@@ -17,8 +17,6 @@ function registerOrder(req, res) {
       total += product.price;
       productId.push(product._id);
     });
-    debug('total : ', total);
-    debug('productId : ', productId);
 
     const newOrder = new Order({
       created_at: Date.now(),
@@ -39,6 +37,17 @@ function registerOrder(req, res) {
   });
 }
 
+function displayOrders(req, res) {
+  Order.displayOrders()
+  .then(function callback(orders) {
+    res.send(orders);
+  }, function error(err) {
+    debug('error : ', err);
+  });
+}
 
 router.route('/confirm')
 .post(registerOrder);
+
+router.route('/api/orders')
+  .get(displayOrders);
