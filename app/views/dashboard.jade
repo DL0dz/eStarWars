@@ -22,7 +22,7 @@ block content
             th
         each product in products
           tr(data-id='#{product._id}')
-            td
+            td.status
               input(type='checkbox' name='status-checkbox' data-id='#{product._id}' data-published='#{product.published}' data-size='mini' data-on-text="Oui" data-off-text="Non" data-on-color="success" data-off-color="danger" checked=product.published ? '' : checked)
             td= product.title
             td= moment(product.created_at).format('DD/MM/YYYY')
