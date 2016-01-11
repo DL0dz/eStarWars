@@ -26,9 +26,6 @@ block content
           p Tags:
             each tag in product.tags
               span.product-tag= tag
-          p= product.price
-          p= product.category
-          p= product.tags
       .row
         form.contact-form(action='/api/cart/add/#{product._id}', method='post')
           .input-group
