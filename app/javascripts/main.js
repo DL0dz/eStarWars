@@ -75,10 +75,10 @@
     var dataElement = {};
 
     for(var i=0; i < inputs.length; i++){
-      if (inputs[i].getAttribute('type') == 'radio' && !(inputs[i].checked)) {
+      if (inputs[i].getAttribute('type') === 'radio' && !(inputs[i].checked)) {
         inputs[i].value = '';
         dataElement[i] = inputs[i].value;
-      } else if (inputs[i].getAttribute('type') == 'checkbox' && !(inputs[i].checked)) {
+      } else if (inputs[i].getAttribute('type') === 'checkbox' && !(inputs[i].checked)) {
         inputs[i].value = '';
         dataElement[i] = inputs[i].value;
       } else if (inputs[i] === '') {
@@ -97,7 +97,7 @@
       quantity: dataElement[3].value,
       price: dataElement[4].value,
       category: dataElement[5].value || dataElement[6].value,
-      tags: [dataElement[7].value, dataElement[8].value],
+      tags: [dataElement[7].value, dataElement[8].value, dataElement[9].value],
     };
 
     $.ajax({
@@ -136,10 +136,10 @@
     var dataElement = {};
 
     for(var i=0; i < inputs.length; i++){
-      if (inputs[i].getAttribute('type') == 'radio' && !(inputs[i].checked)) {
+      if (inputs[i].getAttribute('type') === 'radio' && !(inputs[i].checked)) {
         inputs[i].value = '';
         dataElement[i] = inputs[i].value;
-      } else if (inputs[i].getAttribute('type') == 'checkbox' && !(inputs[i].checked)) {
+      } else if (inputs[i].getAttribute('type') === 'checkbox' && !(inputs[i].checked)) {
         inputs[i].value = '';
         dataElement[i] = inputs[i].value;
       } else if (inputs[i] === '') {
@@ -160,7 +160,7 @@
       quantity: dataElement[3].value,
       price: dataElement[4].value,
       category: dataElement[5].value || dataElement[6].value,
-      tags: [dataElement[7].value, dataElement[8].value],
+      tags: [dataElement[7].value, dataElement[8].value, dataElement[9].value],
     };
 
     $.ajax({

@@ -36,6 +36,9 @@ block content
               label Alliance
                 input(type='checkbox' class='tag' name='tag1' value='alliance' checked='#{product.tags[0]}' ? '' : checked)
             .checkbox
+              label Empire
+                input(type='checkbox' class='tag' name='tag2' value='empire' checked='#{product.tags[1]}' ? '' : checked)
+            .checkbox
               label Jedi
-                input(type='checkbox' class='tag' name='tag2' value='jedi' checked='#{product.tags[1]}' ? '' : checked)
+                input(type='checkbox' class='tag' name='tag3' value='jedi' checked='#{product.tags[2]}' ? '' : checked)
       a(href='/api/products/#{product._id}' class='btn btn-sm btn-primary btn-edit') Éditer

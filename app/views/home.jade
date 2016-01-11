@@ -2,7 +2,18 @@ extends layout
 
 block content
   .page-header
-    h1= category ? category : 'Accueil'
+    if category == 'helmets'
+      h1 Casques
+    else if category == 'lasers'
+      h1 Lasers
+    else if tag == 'alliance'
+      h1 Alliance
+    else if tag == 'empire'
+      h1 Empire
+    else if tag == 'jedi'
+      h1 Jedi
+    else
+      h1 Accueil
 
   each product in products
     .well.product
@@ -15,17 +26,18 @@ block content
               span.glyphicon.glyphicon-picture
         .col-md-8
           h3
-            a(href='/products/#{product.id}', target='_blank') #{product.title}
+            a(href='/products/#{product.id}') #{product.title}
               product.title
           p= product.content
           p Prix:
             span.product-price #{product.price} Crédits Galactiques
           p Catégorie:
             span.product-category
-              a(href='/#{product.category}', target='_blank') #{product.category}
+              a(href='/#{product.category}') #{product.category}
           p Tags:
             each tag in product.tags
-              span.product-tag= tag
+              span.product-tag
+                a(href='?tag=#{tag}') #{tag}
       .row
         form.contact-form(action='/api/cart/add/#{product._id}', method='post')
           .input-group

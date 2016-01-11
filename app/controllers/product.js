@@ -28,7 +28,7 @@ function showProducts(req, res) {
 
   Product.retrieveProducts(category, tag)
     .then(function callback(products) {
-      res.render('home', {products: products, category: category, user: req.user});
+      res.render('home', {products: products, category: category, tag: tag, user: req.user});
     }, function error(err) {
       debug('error : ', err);
     });
