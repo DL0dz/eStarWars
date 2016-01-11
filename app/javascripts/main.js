@@ -185,6 +185,29 @@
   $('.btn-add').on('click', addProduct);
 })();
 
+
+//Display orders
+(function() {
+  function displayOrders(event) {
+    event.preventDefault();
+    $.ajax({
+      url: '/api/orders',
+      type: 'GET',
+      success: function (datas) {
+        $('.js-history-infos').empty();
+        datas.forEach(function callback(order) {
+          $('.js-history-infos').append(
+          '<tr><td>'+ order._id +'</td><td class="lowercase">'+ order.client.email +'</td><td>'+ order.total +'</td><td>'+ (order.finalized ? "oui" : "non") +'</td></tr>'
+          );
+        });
+      },
+    });
+  }
+
+  $('.js-panel-dashboard').on('click', displayOrders);
+})();
+
+
 // add product to the cart
 (function() {
   function addToCart(event) {
