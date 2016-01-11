@@ -14,6 +14,14 @@ orderSchema.statics.registerOrder = function registerOrder(order) {
   return this.create(order);
 };
 
+orderSchema.statics.displayOrders = function displayOrders() {
+  return this
+    .find()
+    .sort({created_at: -1})
+    .populate('products client')
+    .exec();
+};
+
 const Order = mongoose.model('Order', orderSchema);
 
 module.exports = Order;
