@@ -7,8 +7,8 @@ const nodemailer = require('nodemailer');
 const smtpTransport = nodemailer.createTransport('SMTP', {
   service: 'Gmail',
   auth: {
-    user: 'amirackbar@gmail.com',
-    pass: 'itsatrap2016',
+    user: process.env.MAIL_ENGINE_USER,
+    pass: process.env.MAIL_ENGINE_PASSWORD,
   },
 });
 
