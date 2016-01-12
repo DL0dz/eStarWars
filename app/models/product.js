@@ -51,7 +51,7 @@ productSchema.statics.getAllProducts = function getAllProducts() {
   return this
     .find()
     .sort({created_at: -1})
-    .limit(process.env.LIMIT_PRODUCTS * 2)
+    .limit(process.env.LIMIT_PRODUCTS_DASHBOARD)
     .exec();
 };
 
