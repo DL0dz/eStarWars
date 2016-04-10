@@ -1,9 +1,3 @@
-/* global $ */
-
-(function() {
-  console.log('hello world !');
-})();
-
 // Dashboard Page
 // Button to remove a product
 (function() {
